@@ -33,6 +33,51 @@ services:
     networks:
       - petclinic-net
 
+  build-java8:
+    image: openjdk:8
+    container_name: build-java8
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: mvn clean compile
+    networks:
+      - petclinic-net
+
+  test-java11:
+    image: openjdk:11
+    container_name: test-java11
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: mvn test
+    networks:
+      - petclinic-net
+
+  sonar-java17:
+    image: openjdk:17
+    container_name: sonar-java17
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: >
+      bash -c "mvn verify sonar:sonar -Dsonar.projectKey=petclinic
+               -Dsonar.host.url=http://sonarqube:9000
+               -Dsonar.login=your_token"
+    depends_on:
+      - sonarqube
+    networks:
+      - petclinic-net
+
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    networks:
+      - petclinic-net
+
 volumes:
   db_data:
 
