@@ -34,7 +34,9 @@ services:
       - petclinic-net
 
   java8:
-    image: openjdk:8-jdk
+    build:
+      context: .
+      dockerfile: Dockerfile-java8
     container_name: java8
     working_dir: /app
     volumes:
@@ -44,7 +46,9 @@ services:
       - petclinic-net
 
   java11:
-    image: openjdk:11-jdk
+    build:
+      context: .
+      dockerfile: Dockerfile-java11
     container_name: java11
     working_dir: /app
     volumes:
@@ -54,7 +58,9 @@ services:
       - petclinic-net
 
   java17:
-    image: openjdk:17-jdk
+    build:
+      context: .
+      dockerfile: Dockerfile-java17
     container_name: java17
     working_dir: /app
     volumes:
