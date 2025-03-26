@@ -16,43 +16,6 @@ services:
     networks:
       - petclinic-net
 
-  build-java8:
-    image: openjdk:8-jdk
-    container_name: build-java8
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    command: mvn clean compile
-    networks:
-      - petclinic-net
-
-  test-java11:
-    image: openjdk:11-jdk
-    container_name: test-java11
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    command: mvn test
-    networks:
-      - petclinic-net
-
-  sonar-java17:
-    image: openjdk:17-jdk
-    container_name: sonar-java17
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    environment:
-      SONAR_HOST_URL: http://localhost:9000
-      SONAR_TOKEN: ${SONAR_TOKEN}
-    command: >
-      bash -c "mvn sonar:sonar
-        -Dsonar.projectKey=spring-petclinic
-        -Dsonar.host.url=$SONAR_HOST_URL
-        -Dsonar.login=$SONAR_TOKEN"
-    networks:
-      - petclinic-net
-
   app:
     image: spring-petclinic:latest
     build:
@@ -67,6 +30,36 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/petclinic
       SPRING_DATASOURCE_USERNAME: petclinic
       SPRING_DATASOURCE_PASSWORD: petclinic
+    networks:
+      - petclinic-net
+
+  java8:
+    image: openjdk:8-jdk
+    container_name: java8
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: tail -f /dev/null
+    networks:
+      - petclinic-net
+
+  java11:
+    image: openjdk:11-jdk
+    container_name: java11
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: tail -f /dev/null
+    networks:
+      - petclinic-net
+
+  java17:
+    image: openjdk:17-jdk
+    container_name: java17
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: tail -f /dev/null
     networks:
       - petclinic-net
 
