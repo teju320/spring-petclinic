@@ -16,7 +16,7 @@ services:
     networks:
       - petclinic-net
 
-  app:
+  spring-petclinic:
     image: spring-petclinic:latest
     build:
       context: .
@@ -33,39 +33,13 @@ services:
     networks:
       - petclinic-net
 
-  java8:
-    build:
-      context: .
-      dockerfile: Dockerfile-java8
-    container_name: java8
-    working_dir: /app
-    volumes:
-      - .:/app
-    command: tail -f /dev/null
-    networks:
-      - petclinic-net
-
-  java11:
-    build:
-      context: .
-      dockerfile: Dockerfile-java11
-    container_name: java11
-    working_dir: /app
-    volumes:
-      - .:/app
-    command: tail -f /dev/null
-    networks:
-      - petclinic-net
-
-  java17:
-    build:
-      context: .
-      dockerfile: Dockerfile-java17
-    container_name: java17
-    working_dir: /app
-    volumes:
-      - .:/app
-    command: tail -f /dev/null
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
     networks:
       - petclinic-net
 
