@@ -43,6 +43,36 @@ services:
     networks:
       - petclinic-net
 
+  jdk17:
+    image: openjdk:17-jdk
+    container_name: jdk17
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    networks:
+      - petclinic-net
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+  jdk11:
+    image: openjdk:11-jdk
+    container_name: jdk11
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    networks:
+      - petclinic-net
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+  jdk8:
+    image: openjdk:8-jdk
+    container_name: jdk8
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    networks:
+      - petclinic-net
+    entrypoint: ["tail", "-f", "/dev/null"]
+
 volumes:
   db_data:
 
