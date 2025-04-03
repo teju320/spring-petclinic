@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mysql:
     image: mysql:8.0
@@ -41,32 +43,32 @@ services:
     networks:
       - petclinic-net
 
-  jdk8:
-    image: openjdk:8-jdk
-    container_name: jdk8
+  jdk17:
+    image: maven:3.9.9-eclipse-temurin-17
+    container_name: jdk17
     working_dir: /workspace
     volumes:
-      - "C:/Users/tejas/spring-petclinic:/workspace"
+      - ./:/workspace
     networks:
       - petclinic-net
     entrypoint: ["tail", "-f", "/dev/null"]
 
   jdk11:
-    image: openjdk:11-jdk
+    image: maven:3.9.9-eclipse-temurin-11
     container_name: jdk11
     working_dir: /workspace
     volumes:
-      - "C:/Users/tejas/spring-petclinic:/workspace"
+      - ./:/workspace
     networks:
       - petclinic-net
     entrypoint: ["tail", "-f", "/dev/null"]
 
-  jdk17:
-    image: openjdk:17-jdk
-    container_name: jdk17
+  jdk8:
+    image: maven:3.9.9-eclipse-temurin-8
+    container_name: jdk8
     working_dir: /workspace
     volumes:
-      - "C:/Users/tejas/spring-petclinic:/workspace"
+      - ./:/workspace
     networks:
       - petclinic-net
     entrypoint: ["tail", "-f", "/dev/null"]
@@ -76,4 +78,3 @@ volumes:
 
 networks:
   petclinic-net:
-
