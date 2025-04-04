@@ -44,7 +44,7 @@ services:
       - petclinic-net
 
   jdk17:
-    image: maven:3.9.9-eclipse-temurin-17
+    image: openjdk:17-jdk
     container_name: jdk17
     working_dir: /workspace
     volumes:
@@ -53,19 +53,9 @@ services:
       - petclinic-net
     entrypoint: ["tail", "-f", "/dev/null"]
 
-  jdk11:
-    image: maven:3.9.9-eclipse-temurin-11
-    container_name: jdk11
-    working_dir: /workspace
-    volumes:
-      - ./:/workspace
-    networks:
-      - petclinic-net
-    entrypoint: ["tail", "-f", "/dev/null"]
-
-  jdk8:
-    image: maven:3.9.9-eclipse-temurin-8
-    container_name: jdk8
+  jdk21:
+    image: openjdk:21
+    container_name: jdk21
     working_dir: /workspace
     volumes:
       - ./:/workspace
