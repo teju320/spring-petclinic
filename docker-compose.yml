@@ -1,4 +1,4 @@
-version: '3.8'
+name: spring-petclinic
 
 services:
   mysql:
@@ -44,7 +44,7 @@ services:
       - petclinic-net
 
   jdk17:
-    image: openjdk:17-jdk
+    image: maven:3.9.9-eclipse-temurin-17
     container_name: jdk17
     working_dir: /workspace
     volumes:
@@ -54,7 +54,7 @@ services:
     entrypoint: ["tail", "-f", "/dev/null"]
 
   jdk21:
-    image: openjdk:21
+    image: maven:3.9.9-eclipse-temurin-21
     container_name: jdk21
     working_dir: /workspace
     volumes:
